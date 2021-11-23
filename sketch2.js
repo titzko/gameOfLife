@@ -1,12 +1,15 @@
-let sq_size = 7;
+let sq_size = 5;
 let cBoard;
 let nBoard;
 let rows;
 let columns;
 let start_frequency = 10;
+let color1 = 51;
+let color2 = 244;
+let rate = 5;
 
 function setup() {
-	frameRate(5);
+	frameRate(rate);
 	var width = screen.width * 0.6;
 	var height = screen.height * 0.6;
 	createCanvas(width, height);
@@ -24,7 +27,6 @@ function setup() {
 	draw();
 }
 
-//no clue whats happening here, looks like this is a special function in p5 js which gets called constantly
 function draw() {
 	//sets up initial Values
 	if (cBoard[1][1] == null) {
@@ -37,22 +39,11 @@ function draw() {
 function start() {
 	for (var n = 0; n < cBoard.length; n++) {
 		for (var m = 0; m < cBoard[n].length; m++) {
-			// Draw a square at location (30, 20) with a side size of 55.
-			//square(30, 20, 55);
-			xPos = n * sq_size;
-			yPos = m * sq_size;
-			square(xPos, yPos, sq_size);
-
 			randomNumber = Math.floor(Math.random() * start_frequency);
 			cBoard[n][m] = randomNumber;
-			console.log(randomNumber);
-			if (cBoard[n][m] == 0) {
-				fill(51);
-			} else {
-				fill(255);
-			}
 		}
 	}
+	re_draw();
 }
 
 function re_draw() {
@@ -65,9 +56,9 @@ function re_draw() {
 			square(xPos, yPos, sq_size);
 
 			if (cBoard[n][m] == 0) {
-				fill(51);
+				fill(color1);
 			} else {
-				fill(255);
+				fill(color2);
 			}
 		}
 	}
@@ -149,7 +140,3 @@ function modify() {
 	}
 	re_draw();
 }
-
-//0 means alive
-
-//first need to get neighbour cells
