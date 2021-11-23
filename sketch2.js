@@ -1,22 +1,31 @@
-let sq_size = 5;
+let sq_size = 6;
 let cBoard;
 let nBoard;
 let rows;
 let columns;
 let start_frequency = 10;
-let color1 = 51;
+let color1 = 54;
 let color2 = 244;
 let rate = 5;
+let width;
+let height;
+let pressedStart = true;
 
 function setup() {
+	if (document.readyState === "complete") {
+		var canvasContainer = document.getElementById("canvasContainer");
+		var height = canvasContainer.offsetHeight;
+		var width = canvasContainer.offsetWidth;
+		console.log(width);
+	}
+
 	frameRate(rate);
-	var width = screen.width * 0.6;
-	var height = screen.height * 0.6;
+	var canvas = document.getElementById("canvasContainer");
+	newWidth = canvas.style.width;
+	newHeight = canvas.style.height;
 	createCanvas(width, height);
 	rows = Math.ceil(width / sq_size);
 	columns = Math.ceil(height / sq_size);
-	console.log(rows + " rows, width is: " + width);
-	console.log(columns + " columns, height is: " + height);
 
 	nBoard = new Array(rows);
 	cBoard = new Array(rows);
@@ -24,7 +33,7 @@ function setup() {
 		cBoard[i] = new Array(columns);
 		nBoard[i] = new Array(columns);
 	}
-	draw();
+	noLoop();
 }
 
 function draw() {
@@ -47,8 +56,9 @@ function start() {
 }
 
 function re_draw() {
-	for (var n = 0; n < cBoard.length; n++) {
-		for (var m = 0; m < cBoard[n].length; m++) {
+	//cba takin care about the border apporpiatly, so i jsut dont draw the border
+	for (var n = 2; n < cBoard.length - 2; n++) {
+		for (var m = 2; m < cBoard[n].length - 2; m++) {
 			// Draw a square at location (30, 20) with a side size of 55.
 			//square(30, 20, 55);
 			xPos = n * sq_size;
@@ -140,3 +150,34 @@ function modify() {
 	}
 	re_draw();
 }
+
+document.getElementById("playButton").onclick = function () {
+	loop();
+};
+
+document.getElementById("stopButton").onclick = function () {
+	noLoop();
+};
+
+document.getElementById("singleStepButton").onclick = function () {
+	noLoop();
+	redraw();
+};
+
+document.getElementById("slowButton").onclick = function () {
+	noLoop();
+	rate -= 1;
+	frameRate(rate);
+	loop();
+};
+
+document.getElementById("fasterButton").onclick = function () {
+	noLoop();
+	rate += 1;
+	frameRate(rate);
+	loop();
+};
+
+document.getElementById("refillButton").onclick = function () {
+	start();
+};
