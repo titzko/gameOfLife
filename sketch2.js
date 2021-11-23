@@ -1,4 +1,4 @@
-let sq_size = 15;
+let sq_size = 7;
 let cBoard;
 let nBoard;
 let rows;
@@ -7,8 +7,8 @@ let start_frequency = 10;
 
 function setup() {
 	frameRate(5);
-	var width = screen.width;
-	var height = screen.height;
+	var width = screen.width * 0.6;
+	var height = screen.height * 0.6;
 	createCanvas(width, height);
 	rows = Math.ceil(width / sq_size);
 	columns = Math.ceil(height / sq_size);
@@ -28,7 +28,6 @@ function setup() {
 function draw() {
 	//sets up initial Values
 	if (cBoard[1][1] == null) {
-		console.log(cBoard[1][1] + " stat");
 		start();
 	} else {
 		modify();
@@ -88,7 +87,6 @@ function copyBoards(oldBoard) {
 }
 
 function modify() {
-	console.log("recalculate");
 	nBoard = copyBoards(cBoard);
 	var aliveNeighbourCounter;
 
