@@ -9,7 +9,6 @@ let color2 = 244;
 let rate = 5;
 let width;
 let height;
-let pressedStart = true;
 
 function setup() {
 	if (document.readyState === "complete") {
@@ -18,11 +17,7 @@ function setup() {
 		var width = canvasContainer.offsetWidth;
 		console.log(width);
 	}
-
 	frameRate(rate);
-	var canvas = document.getElementById("canvasContainer");
-	newWidth = canvas.style.width;
-	newHeight = canvas.style.height;
 	createCanvas(width, height);
 	rows = Math.ceil(width / sq_size);
 	columns = Math.ceil(height / sq_size);
@@ -59,8 +54,6 @@ function re_draw() {
 	//cba takin care about the border apporpiatly, so i jsut dont draw the border
 	for (var n = 2; n < cBoard.length - 2; n++) {
 		for (var m = 2; m < cBoard[n].length - 2; m++) {
-			// Draw a square at location (30, 20) with a side size of 55.
-			//square(30, 20, 55);
 			xPos = n * sq_size;
 			yPos = m * sq_size;
 			square(xPos, yPos, sq_size);
